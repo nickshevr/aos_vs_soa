@@ -6,15 +6,15 @@
 
 using namespace std;
 
-int SIZE = 1000;
+int SIZE = 100000;
 
 struct Users {
-      string FirstName[1000];
-      string SecondName[1000];
-      string Password[1000];
-      string Email[1000];
-      string Gender[1000];
-      int Year[1000];
+      string FirstName[100000];
+      string SecondName[100000];
+      string Password[100000];
+      string Email[100000];
+      string Gender[100000];
+      int Year[100000];
 };
 
 string* createUser(string& data) {
@@ -61,7 +61,7 @@ int main() {
         i++;
     }
 
-    string* userPassword = findUserPassword(users, "GilbertosintManriquez@somemail.ru");
+    string* userPassword = findUserPassword(users, "ArdissuntCrupper@somemail.ru");
 
     cout << *userPassword << endl;
 

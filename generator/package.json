@@ -1,5 +1,5 @@
 {
-  "name": "user generator",
+  "name": "user_generator",
   "version": "0.0.1",
   "main": "index.js",
   "author": "Nick Shevrov",

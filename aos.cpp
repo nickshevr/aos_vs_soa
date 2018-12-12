@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int SIZE = 1000;
+int SIZE = 100000;
 
 struct User {
       string FirstName;
@@ -61,7 +61,7 @@ int main() {
         i++;
     }
 
-    User* neededUser = findUser(Users, "GilbertosintManriquez@somemail.ru");
+    User* neededUser = findUser(Users, "ArdissuntCrupper@somemail.ru");
 
     cout << neededUser -> Password << neededUser -> FirstName << endl;
 

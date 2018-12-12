@@ -9,7 +9,7 @@ const makeCSVString = userObj => NEDED_KEYS.reduce((acc, key) => (
 
 const users = [];
 
-for (let i=0; i < 1000; i++) {
+for (let i=0; i < 100000; i++) {
     const str = generator.createUserObj();
     users.push(str);
 }

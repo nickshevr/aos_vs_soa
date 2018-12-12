@@ -1,0 +1,2 @@
+/tmp/vtune_amplifier_2019.1.0.579888/bin64/amplxe-runss -dump-vdso -r /tmp/amplxe-results-nickshevr/nickshevr_logrus01hd.market.yandex.net/tmpGOYGBw/r002hs --tmp-dir /tmp/tmpGOYGBw 
+/tmp/vtune_amplifier_2019.1.0.579888/bin64
