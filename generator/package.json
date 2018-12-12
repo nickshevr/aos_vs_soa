@@ -1,0 +1,10 @@
+{
+  "name": "user generator",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Nick Shevrov",
+  "dependencies": {
+    "lorem-ipsum": "^1.0.3",
+    "node-random-name": "1.0.1"
+  }
+}
