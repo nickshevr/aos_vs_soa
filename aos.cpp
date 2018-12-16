@@ -4,76 +4,42 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <random>
 
 using namespace std;
 
-int SIZE = 1000;
-
-struct User {
-      string FirstName;
-      string SecondName;
-      string Password;
-      string Email;
-      string Gender;
-      int Year;
+class Vec {
+public:
+    float x;
+    float y;
+    float z;
 };
-
-string* createUser(string& data) {
-    stringstream ssin(data);
-    string* arr = new string[6];
-    int i = 0;
-
-    while (ssin.good() && i < 6){
-        ssin >> arr[i];
-        ++i;
-    }
-
-    return arr;
-};
-
-User* findUser(User* data, string email) {
-    for (int i = 0; i <= SIZE; i ++) {
-        string userEmail = data[i].Email;
-        int comparsion = email.compare(userEmail);
-
-        if (comparsion == 0) {
-            return &data[i];
-        }
-    }
-
-    return nullptr;
-}
 
 int main() {
-    ifstream infile("users.txt");
-    string line;
-    User *Users = new User[SIZE];
-    vector<string> searchingEmails;
-    int i = 0;
+    float foo = 0;
+    int tests = 30;
 
-    while (getline(infile, line)) {
-        string* data = createUser(line);
+    const int N = 10000000;
 
-        if (i % 10 == 0) {
-            searchingEmails.push_back(data[3]);
-        }
+    Vec* vecs = new Vec[N];
 
-        Users[i].FirstName = data[0];
-        Users[i].SecondName = data[1];
-        Users[i].Password = data[2];
-        Users[i].Email = data[3];
-        Users[i].Gender = data[4];
-        Users[i].Year = atoi(data[5].c_str());
-        i++;
+    for (int i = 0; i < N; i++) {
+        vecs[i].x = rand();
+        vecs[i].y = rand();
+        vecs[i].z = rand();
     }
 
-    while (!searchingEmails.empty()) {
-        string email = searchingEmails.back();
-        searchingEmails.pop_back();
+    for (int i = 0; i < tests; i++) {
+        float sumX, sumY, sumZ;
+        sumX = sumY = sumZ = 0;
 
-        User *neededUser = findUser(Users, email);
+        for (int j = 0; j < N; j++) {
+            sumX += vecs[j].x;
+            sumY += vecs[j].y;
+            sumZ += vecs[j].z;
+        }
 
-        cout << neededUser->Password  << endl;
+        foo += sumX + sumY + sumZ;
     }
 
     return 0;

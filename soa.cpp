@@ -4,76 +4,47 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <random>
 
 using namespace std;
+const int N = 10000000;
 
-int SIZE = 1000;
+class VecSOA {
+public:
+    float* x;
+    float* y;
+    float* z;
 
-struct Users {
-      string FirstName[1000];
-      string SecondName[1000];
-      string Password[1000];
-      string Email[1000];
-      string Gender[1000];
-      int Year[1000];
-};
-
-string* createUser(string& data) {
-    stringstream ssin(data);
-    string* arr = new string[6];
-    int i = 0;
-
-    while (ssin.good() && i < 6){
-        ssin >> arr[i];
-        ++i;
+    VecSOA() {
+        x = new float[N];
+        y = new float[N];
+        z = new float[N];
     }
-
-    return arr;
 };
-
-string* findUserPassword(Users* data, string email) {
-    for (int i = 0; i <= SIZE; i ++) {
-        string userEmail = data->Email[i];
-        int comparsion = email.compare(userEmail);
-
-        if (comparsion == 0) {
-            return &data->Password[i];
-        }
-    }
-
-    return nullptr;
-}
 
 int main() {
-    ifstream infile("users.txt");
-    string line;
-    Users *users = new Users();
-    vector<string> searchingEmails;
-    int i = 0;
+    float foo = 0;
+    int tests = 30;
 
-    while (getline(infile, line)) {
-        string* data = createUser(line);
+    VecSOA* vecSOA = new VecSOA();
 
-        if (i % 10 == 0) {
-            searchingEmails.push_back(data[3]);
-        }
-
-        users -> FirstName[i] = data[0];
-        users -> SecondName[i] = data[1];
-        users -> Password[i] = data[2];
-        users -> Email[i] = data[3];
-        users -> Gender[i] = data[4];
-        users -> Year[i] = atoi(data[5].c_str());
-        i++;
+    for (int i = 0; i < N; i++) {
+        vecSOA -> x[i] = rand();
+        vecSOA -> y[i] = rand();
+        vecSOA -> z[i] = rand();
     }
 
-    while (!searchingEmails.empty()) {
-        string email = searchingEmails.back();
-        searchingEmails.pop_back();
+    for (int i = 0; i < tests; i++) {
+        float sumX, sumY, sumZ;
+        sumX = sumY = sumZ = 0;
 
-        string* userPassword = findUserPassword(users, email);
+        for (int j = 0; j < N; j++) {
+            sumX += vecSOA -> x[j];
+            sumY += vecSOA -> y[j];
+            sumZ += vecSOA -> z[j];
+        }
 
-        cout << *userPassword << endl;
+        foo += sumX + sumY + sumZ;
     }
 
     return 0;
