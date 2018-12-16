@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -47,10 +48,15 @@ int main() {
     ifstream infile("users.txt");
     string line;
     Users *users = new Users();
+    vector<string> searchingEmails;
     int i = 0;
 
     while (getline(infile, line)) {
         string* data = createUser(line);
+
+        if (i % 100 == 0) {
+            searchingEmails.push_back(data[3]);
+        }
 
         users -> FirstName[i] = data[0];
         users -> SecondName[i] = data[1];
@@ -61,9 +67,14 @@ int main() {
         i++;
     }
 
-    string* userPassword = findUserPassword(users, "ArdissuntCrupper@somemail.ru");
+    while (!searchingEmails.empty()) {
+        string email = searchingEmails.back();
+        searchingEmails.pop_back();
 
-    cout << *userPassword << endl;
+        string* userPassword = findUserPassword(users, email);
+
+        cout << *userPassword << endl;
+    }
 
     return 0;
 }
